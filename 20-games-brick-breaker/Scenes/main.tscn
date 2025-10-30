@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://r3qaq0xw4lkb"]
+
+[ext_resource type="PackedScene" uid="uid://dt0s2iik56qnd" path="res://Scenes/background_root.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://dxfqkrcg13hqu" path="res://Scenes/player.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cmlffrvt6u5ri" path="res://Scenes/ball.tscn" id="4_jjvhh"]
+
+[node name="Main" type="Node2D"]
+
+[node name="BGLayer" type="CanvasLayer" parent="."]
+layer = -2
+visible = false
+follow_viewport_enabled = true
+
+[node name="BackgroundRoot" parent="BGLayer" instance=ExtResource("1_jjgbg")]
+
+[node name="Player" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(622, 651)
+sync_to_physics = false
+
+[node name="Ball" parent="." instance=ExtResource("4_jjvhh")]
+position = Vector2(574, 275)
