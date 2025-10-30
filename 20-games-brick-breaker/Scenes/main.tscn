@@ -1,10 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://r3qaq0xw4lkb"]
+[gd_scene load_steps=9 format=3 uid="uid://r3qaq0xw4lkb"]
 
 [ext_resource type="PackedScene" uid="uid://dt0s2iik56qnd" path="res://Scenes/background_root.tscn" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://4y76j4idrhxi" path="res://Scripts/death_floor.gd" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dxfqkrcg13hqu" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cmlffrvt6u5ri" path="res://Scenes/ball.tscn" id="4_jjvhh"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8gbba"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjvhh"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kry3j"]
+normal = Vector2(-1, 0)
+distance = -1280.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjvhh"]
+size = Vector2(1252, 59)
+
 [node name="Main" type="Node2D"]
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Ceiling" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ceiling"]
+position = Vector2(966, 0)
+shape = SubResource("WorldBoundaryShape2D_8gbba")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_jjvhh")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("WorldBoundaryShape2D_kry3j")
+
+[node name="floor" type="Area2D" parent="Walls"]
+collision_mask = 2
+script = ExtResource("1_jjvhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/floor"]
+position = Vector2(639, 753.5)
+shape = SubResource("RectangleShape2D_jjvhh")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
 layer = -2
@@ -14,8 +54,9 @@ follow_viewport_enabled = true
 [node name="BackgroundRoot" parent="BGLayer" instance=ExtResource("1_jjgbg")]
 
 [node name="Player" parent="." instance=ExtResource("2_bo1nx")]
-position = Vector2(622, 651)
-sync_to_physics = false
+position = Vector2(622, 650)
 
 [node name="Ball" parent="." instance=ExtResource("4_jjvhh")]
 position = Vector2(574, 275)
+
+[connection signal="body_entered" from="Walls/floor" to="Walls/floor" method="_on_body_entered"]
