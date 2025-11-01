@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://r3qaq0xw4lkb"]
+[gd_scene load_steps=11 format=3 uid="uid://r3qaq0xw4lkb"]
 
 [ext_resource type="PackedScene" uid="uid://dt0s2iik56qnd" path="res://Scenes/background_root.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://4y76j4idrhxi" path="res://Scripts/death_floor.gd" id="1_jjvhh"]
 [ext_resource type="Script" uid="uid://cgqgy7uqhnb8d" path="res://Scripts/main.gd" id="1_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dxfqkrcg13hqu" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cmlffrvt6u5ri" path="res://Scenes/ball.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://bi2y2ij1ntkmx" path="res://Scenes/level_1.tscn" id="6_21xkr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8gbba"]
 normal = Vector2(0, 1)
@@ -67,5 +68,7 @@ follow_viewport_enabled = true
 position = Vector2(622, 650)
 
 [node name="Balls" type="Node" parent="."]
+
+[node name="Level1" parent="." instance=ExtResource("6_21xkr")]
 
 [connection signal="body_entered" from="Walls/floor" to="Walls/floor" method="_on_body_entered"]

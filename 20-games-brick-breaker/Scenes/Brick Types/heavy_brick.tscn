@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxei4jjctohs0"]
+
+[ext_resource type="Script" uid="uid://bd36f87dru38r" path="res://Scripts/bricks.gd" id="1_hsslf"]
+[ext_resource type="Texture2D" uid="uid://b1ou20y03n30b" path="res://icon.svg" id="2_qpmse"]
+[ext_resource type="Resource" uid="uid://cwnwawvmg086r" path="res://Resources/brick_data.tres" id="2_xkpqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2jnc"]
+size = Vector2(100, 10)
+
+[node name="HeavyBrick" type="StaticBody2D" groups=["brick"]]
+script = ExtResource("1_hsslf")
+brick_data = ExtResource("2_xkpqk")
+brick_type = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0024408156, 0.0028627163, 0.00321828, 1)
+scale = Vector2(0.781, 0.078)
+texture = ExtResource("2_qpmse")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n2jnc")
