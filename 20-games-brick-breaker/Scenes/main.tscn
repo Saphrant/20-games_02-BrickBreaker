@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://r3qaq0xw4lkb"]
+[gd_scene load_steps=10 format=3 uid="uid://r3qaq0xw4lkb"]
 
 [ext_resource type="PackedScene" uid="uid://dt0s2iik56qnd" path="res://Scenes/background_root.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://4y76j4idrhxi" path="res://Scripts/death_floor.gd" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://cgqgy7uqhnb8d" path="res://Scripts/main.gd" id="1_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dxfqkrcg13hqu" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cmlffrvt6u5ri" path="res://Scenes/ball.tscn" id="4_jjvhh"]
 
@@ -19,26 +20,36 @@ distance = -1280.0
 size = Vector2(1252, 59)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_kry3j")
+ball_scene = ExtResource("4_jjvhh")
 
 [node name="Walls" type="Node" parent="."]
 
 [node name="Ceiling" type="StaticBody2D" parent="Walls"]
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ceiling"]
 position = Vector2(966, 0)
 shape = SubResource("WorldBoundaryShape2D_8gbba")
 
 [node name="LeftWall" type="StaticBody2D" parent="Walls"]
+collision_layer = 4
+collision_mask = 3
+constant_linear_velocity = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
 shape = SubResource("WorldBoundaryShape2D_jjvhh")
 
 [node name="RightWall" type="StaticBody2D" parent="Walls"]
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 shape = SubResource("WorldBoundaryShape2D_kry3j")
 
 [node name="floor" type="Area2D" parent="Walls"]
+collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_jjvhh")
 
@@ -48,7 +59,6 @@ shape = SubResource("RectangleShape2D_jjvhh")
 
 [node name="BGLayer" type="CanvasLayer" parent="."]
 layer = -2
-visible = false
 follow_viewport_enabled = true
 
 [node name="BackgroundRoot" parent="BGLayer" instance=ExtResource("1_jjgbg")]
@@ -56,7 +66,6 @@ follow_viewport_enabled = true
 [node name="Player" parent="." instance=ExtResource("2_bo1nx")]
 position = Vector2(622, 650)
 
-[node name="Ball" parent="." instance=ExtResource("4_jjvhh")]
-position = Vector2(574, 275)
+[node name="Balls" type="Node" parent="."]
 
 [connection signal="body_entered" from="Walls/floor" to="Walls/floor" method="_on_body_entered"]

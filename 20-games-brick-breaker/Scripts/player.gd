@@ -1,13 +1,16 @@
 extends CharacterBody2D
 
-@export var max_speed := 800.0
-@export var acceleration := 8000.0
-@export var deceleration := 6000.0
+@onready var ball_spawn_point: Marker2D = %BallSpawnPoint
+
+
+@export var max_speed := 900.0
+@export var acceleration := 10000.0
+@export var deceleration := 5000.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Global.player_node = self #Loads self into global
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +23,5 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(desired_velocity, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
-	
-	global_position.y = 650
 	
 	move_and_slide()
