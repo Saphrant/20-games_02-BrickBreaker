@@ -1,9 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://r3qaq0xw4lkb"]
+[gd_scene load_steps=25 format=3 uid="uid://r3qaq0xw4lkb"]
 
 [ext_resource type="PackedScene" uid="uid://dt0s2iik56qnd" path="res://Scenes/background_root.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://4y76j4idrhxi" path="res://Scripts/death_floor.gd" id="1_jjvhh"]
 [ext_resource type="Script" uid="uid://cgqgy7uqhnb8d" path="res://Scripts/main.gd" id="1_kry3j"]
-[ext_resource type="PackedScene" uid="uid://bi2y2ij1ntkmx" path="res://Scenes/levels.tscn" id="2_6iyac"]
 [ext_resource type="PackedScene" uid="uid://dxfqkrcg13hqu" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://crejsr7brf8fk" path="res://Assets/Particles/smoke_03.png" id="3_6iyac"]
 [ext_resource type="PackedScene" uid="uid://cmlffrvt6u5ri" path="res://Scenes/ball.tscn" id="4_jjvhh"]
@@ -98,7 +97,6 @@ shader_parameter/basic_texture2 = ExtResource("10_jkdf5")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kry3j")
-level_scene = ExtResource("2_6iyac")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_344ge")
@@ -232,9 +230,6 @@ texture_mode = 2
 position = Vector2(640, 605)
 ball_scene = ExtResource("4_jjvhh")
 
-[node name="WaitTimer" type="Timer" parent="."]
-wait_time = 5.0
-ignore_time_scale = true
+[node name="StartTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="PlayArea/floor" to="PlayArea/floor" method="_on_body_entered"]
-[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

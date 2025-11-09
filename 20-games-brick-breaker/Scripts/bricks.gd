@@ -1,25 +1,25 @@
+@tool
 extends Node2D
+
+signal brick_death
 
 enum BrickType {Normal, Heavy, Explosive}
 
-@export var brick_data : BrickData
 @export var brick_type : BrickType
 
 var health := 1
+var brick_score_value := 50
 
 func _ready() -> void:
-	if brick_data:
-		$CollisionShape2D.shape.size = brick_data.brick_size
-		match brick_type:
-			BrickType.Normal:
-				health = 1
-			BrickType.Heavy:
-				health = 3
-			BrickType.Explosive:
-				health = 1
-	print(brick_type)		
+	$BrickColor.visible = true
+	$CollisionShape2D.disabled = false
 
-func take_hit(hit_power : int) -> void:
-	health -= hit_power
-	if health <= 0:
-		queue_free()
+func take_hit() -> void:
+	$HitParticle.emitting = true
+	GameManager.on_score_update(brick_score_value)
+	$CollisionShape2D.disabled = true
+	$BrickColor.visible = false
+	brick_death.emit()
+	await $HitParticle.finished
+	call_deferred("queue_free")
+	

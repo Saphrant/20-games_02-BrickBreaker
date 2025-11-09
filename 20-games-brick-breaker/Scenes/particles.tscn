@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://bwl2m34bybgrb"]
+
+[ext_resource type="Texture2D" uid="uid://cjmhnrgde7lks" path="res://Assets/Particles/twirl_01.png" id="1_lrx72"]
+[ext_resource type="Script" uid="uid://dvm3cscq6500" path="res://Scripts/particles.gd" id="2_7pyg6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7pyg6"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_fv5ml"]
+_data = [Vector2(0, 1), 0.0, 0.726439, 0, 0, Vector2(0.29545456, 0.11235964), 0.0, 0.0, 0, 0, Vector2(0.6515152, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.6348314, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yixwl"]
+curve = SubResource("Curve_fv5ml")
+
+[sub_resource type="Gradient" id="Gradient_sph3f"]
+colors = PackedColorArray(0.3553136, 0.35531354, 0.35531357, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f56ef"]
+gradient = SubResource("Gradient_sph3f")
+
+[sub_resource type="Gradient" id="Gradient_3l31j"]
+colors = PackedColorArray(0, 0.5, 1, 1, 1, 0.5609253, 0.6401717, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vuvy8"]
+gradient = SubResource("Gradient_3l31j")
+
+[sub_resource type="Curve" id="Curve_8ns5o"]
+_data = [Vector2(0, 0.49438208), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rvlvc"]
+curve = SubResource("Curve_8ns5o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cr50e"]
+lifetime_randomness = 0.5
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(9.82, 4.99, 1)
+emission_shape = 1
+emission_sphere_radius = 3.52
+angle_min = -89.99999
+angle_max = 90.000015
+inherit_velocity_ratio = 0.06
+direction = Vector3(0, -1, 0)
+flatness = 1.0
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 50, 0)
+scale_min = 0.0
+scale_max = 0.02
+scale_curve = SubResource("CurveTexture_rvlvc")
+color = Color(1.1845207, 0.6300301, 1.224127, 1)
+color_ramp = SubResource("GradientTexture1D_vuvy8")
+color_initial_ramp = SubResource("GradientTexture1D_f56ef")
+alpha_curve = SubResource("CurveTexture_yixwl")
+turbulence_noise_strength = 17.69
+turbulence_noise_scale = 6.806
+turbulence_noise_speed_random = 2.21
+turbulence_influence_min = 0.07700001
+turbulence_influence_max = 0.54300004
+turbulence_initial_displacement_min = -71.2
+turbulence_initial_displacement_max = 55.7
+
+[node name="GPUParticles2D2" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_7pyg6")
+emitting = false
+amount = 250
+sub_emitter = NodePath(".")
+texture = ExtResource("1_lrx72")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_cr50e")
+script = ExtResource("2_7pyg6")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Levels" load_steps=2 format=3 uid="uid://bh32jrw5nv7od"]
+
+[ext_resource type="Script" uid="uid://b7cspqfy2da8n" path="res://Scripts/Levels/level_database.gd" id="1_p0748"]
+
+[resource]
+script = ExtResource("1_p0748")
+Level_1_1 = [1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0]
+Level_1_2 = [1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1]
+Level_1_3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1]
+metadata/_custom_type_script = "uid://b7cspqfy2da8n"

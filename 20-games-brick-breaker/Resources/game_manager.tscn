@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm4y8qcv4q1j5"]
+
+[ext_resource type="Script" uid="uid://b1465886ytllu" path="res://Resources/game_manager.gd" id="1_oj352"]
+[ext_resource type="PackedScene" uid="uid://bwl2m34bybgrb" path="res://Scenes/particles.tscn" id="2_4tp53"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_oj352")
+background_particle_scene = ExtResource("2_4tp53")
+
+[node name="ParticleParent" type="Node" parent="."]

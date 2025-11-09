@@ -1,17 +1,18 @@
-[gd_scene load_steps=26 format=3 uid="uid://r3qaq0xw4lkb"]
+[gd_scene load_steps=17 format=3 uid="uid://r3qaq0xw4lkb"]
 
 [ext_resource type="PackedScene" uid="uid://dt0s2iik56qnd" path="res://Scenes/background_root.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://4y76j4idrhxi" path="res://Scripts/death_floor.gd" id="1_jjvhh"]
 [ext_resource type="Script" uid="uid://cgqgy7uqhnb8d" path="res://Scripts/main.gd" id="1_kry3j"]
-[ext_resource type="PackedScene" uid="uid://bi2y2ij1ntkmx" path="res://Scenes/levels.tscn" id="2_6iyac"]
 [ext_resource type="PackedScene" uid="uid://dxfqkrcg13hqu" path="res://Scenes/player.tscn" id="2_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://crejsr7brf8fk" path="res://Assets/Particles/smoke_03.png" id="3_6iyac"]
+[ext_resource type="PackedScene" uid="uid://bwl2m34bybgrb" path="res://Scenes/particles.tscn" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://cmlffrvt6u5ri" path="res://Scenes/ball.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://f26nceuifo8i" path="res://Scenes/UI.tscn" id="6_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://bu2ugjlj7qcfh" path="res://Assets/Sprites/border_white.png" id="7_fdnlq"]
 [ext_resource type="Shader" uid="uid://bhy8ekma0whac" path="res://Resources/thunder_shader.tres" id="8_6iyac"]
 [ext_resource type="Texture2D" uid="uid://vw2gaba4goel" path="res://Assets/Particles/spark_05_rotated.png" id="9_fdnlq"]
+[ext_resource type="PackedScene" uid="uid://m7m1r6onbq5h" path="res://Scenes/Brick Types/simple_brick.tscn" id="9_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://c0pclmorcxr6x" path="res://Assets/Particles/spark_06_rotated.png" id="10_jkdf5"]
+[ext_resource type="Texture2D" uid="uid://d1ces6h127qpf" path="res://Assets/Sprites/unnamed.jpg" id="11_d1ilt"]
 
 [sub_resource type="Environment" id="Environment_344ge"]
 background_mode = 3
@@ -27,66 +28,6 @@ glow_bloom = 0.06
 glow_blend_mode = 0
 volumetric_fog_density = 0.7382
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fdnlq"]
-blend_mode = 1
-light_mode = 1
-
-[sub_resource type="Curve" id="Curve_jkdf5"]
-_data = [Vector2(0, 1), 0.0, 0.726439, 0, 0, Vector2(0.29545456, 0.11235964), 0.0, 0.0, 0, 0, Vector2(0.6515152, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.6348314, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_wsu2k"]
-curve = SubResource("Curve_jkdf5")
-
-[sub_resource type="Gradient" id="Gradient_k12tt"]
-colors = PackedColorArray(0.3553136, 0.35531354, 0.35531357, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_h1bgf"]
-gradient = SubResource("Gradient_k12tt")
-
-[sub_resource type="Gradient" id="Gradient_b3802"]
-colors = PackedColorArray(0, 0.5, 1, 1, 1, 0.5609253, 0.6401717, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fevyy"]
-gradient = SubResource("Gradient_b3802")
-
-[sub_resource type="Curve" id="Curve_hibaj"]
-_data = [Vector2(0, 0.49438208), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_pdsj5"]
-curve = SubResource("Curve_hibaj")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ee4r6"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(10, 5, 1)
-emission_shape = 3
-emission_box_extents = Vector3(25, 5, 1)
-angle_min = -89.99999
-angle_max = 90.000015
-inherit_velocity_ratio = 0.052
-direction = Vector3(0, -1, 0)
-spread = 90.0
-initial_velocity_min = 50.0
-initial_velocity_max = 150.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.01
-scale_max = 0.02
-scale_curve = SubResource("CurveTexture_pdsj5")
-color = Color(1.1845207, 0.6300301, 1.224127, 1)
-color_ramp = SubResource("GradientTexture1D_fevyy")
-color_initial_ramp = SubResource("GradientTexture1D_h1bgf")
-alpha_curve = SubResource("CurveTexture_wsu2k")
-turbulence_noise_strength = 20.0
-turbulence_noise_scale = 10.0
-turbulence_noise_speed = Vector3(500, 8.785, 0)
-turbulence_noise_speed_random = 4.0
-turbulence_influence_min = 0.0
-turbulence_influence_max = 1.0
-turbulence_initial_displacement_min = -90.4
-turbulence_initial_displacement_max = 100.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjvhh"]
 size = Vector2(1252, 59)
 
@@ -98,7 +39,8 @@ shader_parameter/basic_texture2 = ExtResource("10_jkdf5")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kry3j")
-level_scene = ExtResource("2_6iyac")
+ball_scene = ExtResource("4_jjvhh")
+brick_blueprints = Array[PackedScene]([ExtResource("9_ynf5e")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_344ge")
@@ -113,15 +55,7 @@ follow_viewport_enabled = true
 [node name="BackgroundRoot" parent="BGLayer" instance=ExtResource("1_jjgbg")]
 metadata/_edit_lock_ = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="BGLayer"]
-material = SubResource("CanvasItemMaterial_fdnlq")
-position = Vector2(638, 630)
-amount = 250
-texture = ExtResource("3_6iyac")
-lifetime = 5.0
-speed_scale = 0.6
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_ee4r6")
+[node name="Node2D" parent="BGLayer" instance=ExtResource("4_344ge")]
 
 [node name="Menu" parent="." instance=ExtResource("6_jkdf5")]
 
@@ -144,7 +78,7 @@ default_color = Color(18.892157, 18.892157, 18.892157, 1)
 
 [node name="BorderWhite" type="Sprite2D" parent="PlayArea/Walls"]
 self_modulate = Color(0, 6.346868, 6.346868, 1)
-position = Vector2(0, 4)
+position = Vector2(-0.5, 4)
 scale = Vector2(0.535, 0.56857145)
 texture = ExtResource("7_fdnlq")
 
@@ -196,7 +130,7 @@ script = ExtResource("1_jjvhh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea/floor"]
 visible = false
-position = Vector2(643, 658)
+position = Vector2(643, 640)
 shape = SubResource("RectangleShape2D_jjvhh")
 
 [node name="Line2D3" type="Line2D" parent="PlayArea/floor"]
@@ -230,11 +164,16 @@ texture_mode = 2
 
 [node name="Player" parent="." instance=ExtResource("2_bo1nx")]
 position = Vector2(640, 605)
-ball_scene = ExtResource("4_jjvhh")
 
-[node name="WaitTimer" type="Timer" parent="."]
-wait_time = 5.0
-ignore_time_scale = true
+[node name="Balls" type="Node" parent="."]
+
+[node name="Unnamed" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(640, 360)
+scale = Vector2(0.6611227, 0.6611227)
+texture = ExtResource("11_d1ilt")
+metadata/_edit_lock_ = true
+
+[node name="Bricks" type="Node" parent="."]
 
 [connection signal="body_entered" from="PlayArea/floor" to="PlayArea/floor" method="_on_body_entered"]
-[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
