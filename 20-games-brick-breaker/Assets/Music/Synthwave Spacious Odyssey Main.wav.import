@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://coeh3sdxe0sfe"
+path="res://.godot/imported/Synthwave Spacious Odyssey Main.wav-5d8479a0cee0c10267898dace7377036.sample"
+
+[deps]
+
+source_file="res://Assets/Music/Synthwave Spacious Odyssey Main.wav"
+dest_files=["res://.godot/imported/Synthwave Spacious Odyssey Main.wav-5d8479a0cee0c10267898dace7377036.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

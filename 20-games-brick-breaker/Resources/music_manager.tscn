@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://fm1cfr4xwt2j"]
+
+[ext_resource type="Script" uid="uid://c8gt2nkyoebxx" path="res://Resources/music_manager.gd" id="1_01hy4"]
+[ext_resource type="AudioStream" uid="uid://ba8bhy5k05y7g" path="res://Assets/Music/Synthwave Blade Main.wav" id="3_pflav"]
+
+[node name="MusicManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_01hy4")
+
+[node name="MusicPlayerB" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pflav")
+autoplay = true
+bus = &"Music"
+playback_type = 1

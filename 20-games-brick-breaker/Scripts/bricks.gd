@@ -3,10 +3,6 @@ extends Node2D
 
 signal brick_death
 
-enum BrickType {Normal, Heavy, Explosive}
-
-@export var brick_type : BrickType
-
 var health := 1
 var brick_score_value := 50
 

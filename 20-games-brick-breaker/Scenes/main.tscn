@@ -97,6 +97,7 @@ shader_parameter/basic_texture = ExtResource("9_fdnlq")
 shader_parameter/basic_texture2 = ExtResource("10_jkdf5")
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_kry3j")
 level_scene = ExtResource("2_6iyac")
 
@@ -233,7 +234,7 @@ position = Vector2(640, 605)
 ball_scene = ExtResource("4_jjvhh")
 
 [node name="WaitTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 0.5
 ignore_time_scale = true
 
 [connection signal="body_entered" from="PlayArea/floor" to="PlayArea/floor" method="_on_body_entered"]

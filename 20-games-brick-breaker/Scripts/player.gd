@@ -9,14 +9,11 @@ var held_ball = null
 @export var acceleration := 10000.0
 @export var deceleration := 8000.0
 
-var is_new_ball: bool
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameManager.game_start_request.connect(_on_game_request)
 	GameManager.level_up.connect(_on_level_up)
 	GameManager.ball_restart.connect(_on_ball_restart)
-	is_new_ball = true
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,11 +24,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(held_ball):
 		held_ball.launch()
 		held_ball = null
-		if is_new_ball:
-			GameManager.game_started(is_new_ball)
-			is_new_ball = false
-		else:
-			GameManager.game_started(is_new_ball)
+		
+		GameManager.report_ball_launched()
 	
 	var direction := Vector2.ZERO
 	direction.x = Input.get_axis("move_left", "move_right")
@@ -51,12 +45,10 @@ func spawn_new_ball() -> void:
 		call_deferred("add_child", held_ball)
 
 func _on_game_request(_is_new_game) -> void:
-	is_new_ball = true
 	spawn_new_ball()
 
 func _on_ball_restart() -> void:
 	spawn_new_ball()
 	
 func _on_level_up() -> void:
-	is_new_ball = false
 	spawn_new_ball()

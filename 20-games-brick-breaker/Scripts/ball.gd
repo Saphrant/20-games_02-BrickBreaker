@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
+@onready var ball_hum: AudioStreamPlayer2D = $ball_hum
 
 var initial_y_velocity := 500.0
 var current_ball_velocity : float
 var min_vertical_speed := 150
-var launch_x = randf_range(-100.0, 100.0)
-var min_nudge = 25.0
+var launch_x = 10
 
 var is_in_air := false
 var is_held = true
@@ -33,16 +33,19 @@ func _physics_process(_delta: float) -> void:
 			var influence_x = clamp(shape_offset_x / shape_half_width, -1.0, 1.0)
 			var bounce_vector = Vector2(influence_x, -1.0).normalized()
 			velocity = bounce_vector * current_ball_velocity
+			GameManager.report_paddle_hit()
 		elif collision.get_collider().is_in_group("brick"):
 			velocity = velocity.bounce(normal)
 			velocity = velocity * 1.005
-			collider.take_hit()
+			GameManager.on_ball_brick_collision(collider)
 		else:
 			velocity = velocity.bounce(normal)
 			var collision_pos = collision.get_position()
 			GameManager.on_ball_wall_collision(collision_pos, normal)
 			
 		current_ball_velocity = velocity.length()
+		var speed_percent = velocity.length() / current_ball_velocity
+		ball_hum.pitch_scale = 1.0 + (speed_percent * 0.5)
 	if abs(velocity.y) < min_vertical_speed:
 		velocity.y = sign(velocity.y) * min_vertical_speed
 
@@ -51,12 +54,8 @@ func launch() -> void:
 		return
 	is_held = false
 	reparent(get_tree().current_scene)
-	if abs(launch_x) < min_nudge:
-		launch_x = sign(launch_x) * min_nudge
 	velocity = Vector2(launch_x, -initial_y_velocity)
 	is_in_air = true
 
 func _on_level_up() -> void:
 	call_deferred("queue_free")
-	is_held = true
-	is_in_air = false

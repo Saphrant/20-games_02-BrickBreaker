@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://f26nceuifo8i"]
+[gd_scene load_steps=6 format=3 uid="uid://f26nceuifo8i"]
 
 [ext_resource type="FontFile" uid="uid://ctqki84th6hk4" path="res://Assets/Fonts/Game Played.otf" id="1_48xlc"]
 [ext_resource type="Script" uid="uid://blr2p63l1ykft" path="res://Scripts/UI.gd" id="1_dewlx"]
 [ext_resource type="Theme" uid="uid://dttggorvx7bu3" path="res://Resources/main.tres" id="2_1ehe0"]
 [ext_resource type="FontFile" uid="uid://rsndhjckg2mo" path="res://Assets/Fonts/Absolute Xero.otf" id="4_hfhsn"]
+[ext_resource type="PackedScene" uid="uid://bgdrx335rgmj8" path="res://Resources/volume_slider.tscn" id="5_qwshj"]
 
 [node name="UI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_dewlx")
 
 [node name="UIControl" type="CanvasLayer" parent="."]
@@ -80,6 +82,7 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="PowerUpLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -94,10 +97,27 @@ grow_vertical = 0
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_48xlc")
 theme_override_font_sizes/font_size = 26
-text = "BRICK BREAKER"
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -161.5
+offset_top = 123.0
+offset_right = 161.5
+offset_bottom = 191.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_48xlc")
+theme_override_font_sizes/font_size = 56
+text = "Game Over"
 horizontal_alignment = 1
 
 [node name="LevelComplete" type="Control" parent="."]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -106,27 +126,69 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BonusPopUp" type="Label" parent="LevelComplete"]
+z_index = 2
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -70.0
+offset_bottom = -49.999695
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1ehe0")
+theme_override_fonts/font = ExtResource("4_hfhsn")
+theme_override_font_sizes/font_size = 16
+text = "Bonus +500"
+horizontal_alignment = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="LevelComplete"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -237.5
-offset_top = 174.0
-offset_right = 237.5
-offset_bottom = 88.0
+anchor_bottom = 0.5
+offset_left = -223.5
+offset_top = -180.0
+offset_right = 223.5
+offset_bottom = -20.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelComplete/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 100
 
-[node name="Label" type="Label" parent="LevelComplete/MarginContainer/VBoxContainer"]
+[node name="LevelCompleteLabel" type="Label" parent="LevelComplete/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_1ehe0")
 theme_override_fonts/font = ExtResource("4_hfhsn")
 theme_override_font_sizes/font_size = 32
 text = "Level Complete"
 horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelComplete/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ScoreBonusLabel" type="Label" parent="LevelComplete/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_1ehe0")
+theme_override_fonts/font = ExtResource("4_hfhsn")
+theme_override_font_sizes/font_size = 24
+text = "Bonus Score: "
+
+[node name="ScoreBonusScore" type="Label" parent="LevelComplete/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_1ehe0")
+theme_override_fonts/font = ExtResource("4_hfhsn")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 2
 
 [node name="MenuControl" type="Control" parent="."]
 visible = false
@@ -198,15 +260,10 @@ layout_mode = 2
 text = "SFX Volume:"
 horizontal_alignment = 2
 
-[node name="SFXSlider" type="HSlider" parent="MenuControl/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
+[node name="SFXVolumeSlider" parent="MenuControl/VBoxContainer/HBoxContainer2" instance=ExtResource("5_qwshj")]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("2_1ehe0")
-step = 10.0
-value = 50.0
-rounded = true
+bus_name = "SFX"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuControl/VBoxContainer"]
 layout_mode = 2
@@ -217,15 +274,10 @@ layout_mode = 2
 text = "Music Volume:"
 horizontal_alignment = 2
 
-[node name="MusicSlider" type="HSlider" parent="MenuControl/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
+[node name="MusicVolumeSlider" parent="MenuControl/VBoxContainer/HBoxContainer" instance=ExtResource("5_qwshj")]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("2_1ehe0")
-step = 10.0
-value = 50.0
-rounded = true
+bus_name = "Music"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MenuControl/VBoxContainer"]
 layout_mode = 2
@@ -236,7 +288,7 @@ layout_mode = 2
 text = "Mute:"
 horizontal_alignment = 2
 
-[node name="MusicSlider" type="CheckBox" parent="MenuControl/VBoxContainer/HBoxContainer3"]
+[node name="MuteCheck" type="CheckBox" parent="MenuControl/VBoxContainer/HBoxContainer3"]
 self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -254,8 +306,107 @@ theme = ExtResource("2_1ehe0")
 theme_override_font_sizes/font_size = 18
 text = "Quit"
 
+[node name="PauseControl" type="Control" parent="."]
+visible = false
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -68.0
+offset_right = 125.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_1ehe0")
+text = "Resume"
+
+[node name="HSeparator5" type="HSeparator" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Sound"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXSettingLabel" type="Label" parent="PauseControl/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+text = "SFX Volume:"
+horizontal_alignment = 2
+
+[node name="SFXVolumeSlider" parent="PauseControl/VBoxContainer/HBoxContainer2" instance=ExtResource("5_qwshj")]
+layout_mode = 2
+size_flags_horizontal = 3
+bus_name = "SFX"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicSettingLabel" type="Label" parent="PauseControl/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+text = "Music Volume:"
+horizontal_alignment = 2
+
+[node name="MusicVolumeSlider" parent="PauseControl/VBoxContainer/HBoxContainer" instance=ExtResource("5_qwshj")]
+layout_mode = 2
+size_flags_horizontal = 3
+bus_name = "Music"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicSettingLabel" type="Label" parent="PauseControl/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+text = "Mute:"
+horizontal_alignment = 2
+
+[node name="MuteCheck" type="CheckBox" parent="PauseControl/VBoxContainer/HBoxContainer3"]
+self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme = ExtResource("2_1ehe0")
+flat = true
+
+[node name="HSeparator4" type="HSeparator" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="PauseControl/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_1ehe0")
+theme_override_font_sizes/font_size = 18
+text = "Quit"
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.1
+ignore_time_scale = true
+
 [connection signal="button_down" from="MenuControl/VBoxContainer/PlayButton" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="MenuControl/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_down"]
-[connection signal="value_changed" from="MenuControl/VBoxContainer/HBoxContainer2/SFXSlider" to="." method="_on_sfx_value_changed"]
-[connection signal="value_changed" from="MenuControl/VBoxContainer/HBoxContainer/MusicSlider" to="." method="_on_music_value_changed"]
+[connection signal="toggled" from="MenuControl/VBoxContainer/HBoxContainer3/MuteCheck" to="." method="_on_mute_check_toggled"]
 [connection signal="button_down" from="MenuControl/VBoxContainer/QuitButton" to="." method="_on_quit_button_down"]
+[connection signal="button_down" from="PauseControl/VBoxContainer/ResumeButton" to="." method="_on_resume_button_button_down"]
+[connection signal="toggled" from="PauseControl/VBoxContainer/HBoxContainer3/MuteCheck" to="." method="_on_mute_check_toggled"]
+[connection signal="button_down" from="PauseControl/VBoxContainer/QuitButton" to="." method="_on_quit_button_down"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]

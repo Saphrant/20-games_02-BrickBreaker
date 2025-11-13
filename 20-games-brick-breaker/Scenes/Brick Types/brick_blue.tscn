@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddgb7gu3ya8"]
+[gd_scene load_steps=13 format=3 uid="uid://ddgb7gu3ya8"]
 
 [ext_resource type="Script" uid="uid://bd36f87dru38r" path="res://Scripts/bricks.gd" id="1_kio3a"]
 [ext_resource type="Texture2D" uid="uid://bgojwhue421s" path="res://Assets/Particles/magic_01.png" id="3_2k1mc"]
+[ext_resource type="Script" uid="uid://dv0uyjekuu2wv" path="res://Scenes/Brick Types/hit_particle.gd" id="3_kio3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2jnc"]
 size = Vector2(50, 20)
@@ -65,6 +66,7 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.44
 process_material = SubResource("ParticleProcessMaterial_4ayxi")
+script = ExtResource("3_kio3a")
 
 [node name="BrickColor" type="Node2D" parent="."]
 

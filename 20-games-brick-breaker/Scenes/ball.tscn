@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmlffrvt6u5ri"]
+[gd_scene load_steps=5 format=3 uid="uid://cmlffrvt6u5ri"]
 
 [ext_resource type="Script" uid="uid://f0r7lmfentir" path="res://Scripts/ball.gd" id="1_ij5cq"]
 [ext_resource type="Texture2D" uid="uid://cplkum05dmqvy" path="res://Assets/Sprites/Ball.png" id="2_ij5cq"]
+[ext_resource type="AudioStream" uid="uid://b3wf4s5mevu0h" path="res://Assets/SFX/sci-fi_deep_electric_hum_loop_01.wav" id="3_376qj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_25osk"]
 radius = 6.0
 
 [node name="Ball" type="CharacterBody2D" groups=["ball"]]
+process_mode = 1
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
@@ -20,3 +22,11 @@ texture = ExtResource("2_ij5cq")
 shape = SubResource("CircleShape2D_25osk")
 
 [node name="Line2D" type="Line2D" parent="."]
+
+[node name="ball_hum" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_376qj")
+autoplay = true
+max_distance = 1052.0
+attenuation = 5.656845
+panning_strength = 1.85
+bus = &"SFX"

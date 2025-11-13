@@ -12,12 +12,10 @@ signal level_complete
 	4: preload("res://Scenes/Brick Types/brick_purple.tscn")
 }
 
-# 2. LINK TO YOUR LEVEL DATABASE
 @export var level_db: Levels
 @export_flags("Use Debug") var use_debug
 @export var level_index := 1
 
-# 3. DEFINE BRICK SIZE AND STARTING POSITION
 @export var brick_size: Vector2 = Vector2(50, 20)
 @export var level_start_pos: Vector2 = Vector2(466, 150)
 @export var brick_padding := 1
@@ -34,14 +32,13 @@ func _ready():
 	var level_data = level_db.get("Level_" + str(current_level_index))
 	_spawn_level(level_data)
 
-# 4. THE SPAWNING FUNCTION
 func _spawn_level(level_data: PackedStringArray):
-	# Loop through each string in the array (Y-axis)
+	# Loop through Y-axis
 	for y in level_data.size():
 		var row_string = level_data[y]
-		# Loop through each character in the string (X-axis)
+		# Loop through X-axis
 		for x in row_string.length():
-			# Convert the character ("1", "2", etc.) to an integer
+			# Convert the character to an integer
 			var brick_type = row_string[x].to_int()
 			
 			# 0 means empty, so we only spawn if > 0

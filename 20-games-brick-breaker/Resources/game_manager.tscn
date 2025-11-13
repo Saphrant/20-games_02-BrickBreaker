@@ -1,10 +1,75 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm4y8qcv4q1j5"]
+[gd_scene load_steps=13 format=3 uid="uid://cm4y8qcv4q1j5"]
 
 [ext_resource type="Script" uid="uid://b1465886ytllu" path="res://Resources/game_manager.gd" id="1_oj352"]
 [ext_resource type="PackedScene" uid="uid://bwl2m34bybgrb" path="res://Scenes/particles.tscn" id="2_4tp53"]
+[ext_resource type="AudioStream" uid="uid://dfofcxbcbcnuh" path="res://Assets/SFX/IMPACT Hit Short Clink 01_mono.wav" id="3_d3b8p"]
+[ext_resource type="AudioStream" uid="uid://cghwhcxhwbxqh" path="res://Assets/SFX/IMPACT Hit Short Clink 02_mono.wav" id="4_8ftj1"]
+[ext_resource type="AudioStream" uid="uid://cn457t07hl1b4" path="res://Assets/SFX/ComboAlarm.ogg" id="6_lxoce"]
+[ext_resource type="AudioStream" uid="uid://c0ofu7bs4sd5h" path="res://Assets/SFX/BrickBreak.ogg" id="7_ggiro"]
+[ext_resource type="AudioStream" uid="uid://dkhw07t3r6j02" path="res://Assets/SFX/IMPACT Button Press Click 01.ogg" id="9_ldlvb"]
+[ext_resource type="AudioStream" uid="uid://m027m21l2gqy" path="res://Assets/SFX/ui_stamp_02.wav" id="10_d3b8p"]
+[ext_resource type="AudioStream" uid="uid://dwkdiu5v55bgo" path="res://Assets/SFX/IMPACT Button Press Click 02.ogg" id="10_e386i"]
+[ext_resource type="AudioStream" uid="uid://32bbqj2s84py" path="res://Assets/SFX/ui_text_type_scroll_effect_05.wav" id="11_8ftj1"]
+[ext_resource type="AudioStream" uid="uid://cwp1mr1drrhue" path="res://Assets/SFX/ui_text_type_scroll_effect_05_reversed.wav" id="11_d3b8p"]
+[ext_resource type="AudioStream" uid="uid://cgpwj3iftdyu1" path="res://Assets/SFX/sci-fi_alarm_warning_loop_02.wav" id="12_8ftj1"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_oj352")
 background_particle_scene = ExtResource("2_4tp53")
 
 [node name="ParticleParent" type="Node" parent="."]
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="WallHit1" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_d3b8p")
+max_distance = 1086.0
+bus = &"SFX"
+
+[node name="WallHit2" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("4_8ftj1")
+attenuation = 1.8025018
+bus = &"SFX"
+playback_type = 1
+
+[node name="ComboAlarm" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("6_lxoce")
+max_distance = 788.0
+attenuation = 0.73204285
+panning_strength = 1.58
+bus = &"SFX"
+
+[node name="BrickBreak1" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("7_ggiro")
+attenuation = 0.37892917
+bus = &"SFX"
+
+[node name="PaddleHit1" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("9_ldlvb")
+bus = &"SFX"
+
+[node name="PaddleHit2" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("10_e386i")
+bus = &"SFX"
+
+[node name="UiStamp02" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("10_d3b8p")
+volume_db = -5.0
+bus = &"UI"
+
+[node name="UiTextTypeScrollEffect05" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("11_8ftj1")
+volume_db = -5.0
+bus = &"UI"
+
+[node name="UiTextTypeScrollEffect06" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("11_d3b8p")
+volume_db = -10.0
+pitch_scale = 0.6
+bus = &"UI"
+
+[node name="BallDeath" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("12_8ftj1")
+volume_db = -0.15
+pitch_scale = 0.86
+bus = &"SFX"

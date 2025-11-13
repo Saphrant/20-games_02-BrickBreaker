@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dkhw07t3r6j02"
+path="res://.godot/imported/IMPACT Button Press Click 01.ogg-972afb3e8966f22ee08afd29e1a57876.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/SFX/IMPACT Button Press Click 01.ogg"
+dest_files=["res://.godot/imported/IMPACT Button Press Click 01.ogg-972afb3e8966f22ee08afd29e1a57876.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
