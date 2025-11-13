@@ -27,6 +27,7 @@ func _ready() -> void:
 
 #--- Game states ---
 func _on_game_start_request(is_new_game: bool) -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	if is_new_game:
 		if FileAccess.file_exists(SAVE_PATH):
 			DirAccess.remove_absolute(SAVE_PATH)
@@ -50,14 +51,17 @@ func _on_score_animations_finished() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("esc") and GameManager.is_game_started:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		if not GameManager.is_paused:
 			get_tree().paused = true
 			GameManager.on_game_paused(true)
 		elif GameManager.is_paused:
 			get_tree().paused = false
 			GameManager.on_game_paused(false)
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _on_game_over() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if GameManager.current_score > current_highscore:
 		current_highscore = GameManager.current_score
 		player_save()

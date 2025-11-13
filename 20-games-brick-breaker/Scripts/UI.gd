@@ -153,6 +153,7 @@ func _on_mute_check_toggled(toggled_on: bool) -> void:
 func _on_resume_button_button_down() -> void:
 	GameManager.on_game_paused(false)
 	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _on_game_over() -> void:
 	game_over_label.visible = true

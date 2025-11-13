@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(held_ball):
 		held_ball.launch()
 		held_ball = null
-		
+		 
 		GameManager.report_ball_launched()
 	
 	var direction := Vector2.ZERO

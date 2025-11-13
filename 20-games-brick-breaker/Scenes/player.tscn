@@ -61,6 +61,7 @@ shape = SubResource("RectangleShape2D_cvnsp")
 
 [node name="BallSpawnPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -13)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
